@@ -18,7 +18,9 @@ var
 	external 'GetLogicalDriveStringsA@kernel32.dll stdcall';
 
 const
-	UniqueFile = 'RACERS.ICO';
+	UniqueFile_1 = 'RACERS.ICO';
+	UniqueFile_2 = 'Lego Racers\RACERS.ICO';
+
 
 	DRIVE_UNKNOWN = 0; // The drive type cannot be determined.
 	DRIVE_NO_ROOT_DIR = 1; // The root path is invalid. For example, no volume is mounted at the path.
@@ -90,12 +92,18 @@ var
 begin
 	for i:=0 to GetArrayLength(DrvLetters) -1 do
 	begin
-		if FileExists( DrvLetters[i] + UniqueFile) then
+		if FileExists( DrvLetters[i] + UniqueFile_1) then
 		begin
 			result:=DrvLetters[i];
 			exit;
 		end
 		else
+    if FileExists( DrvLetters[i] + UniqueFile_2) then
+		begin
+			result:=DrvLetters[i];
+			exit;
+		end
+    else
 
 	end;
 

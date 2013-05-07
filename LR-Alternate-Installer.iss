@@ -114,7 +114,7 @@ Root: "HKCU"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFla
 ; From to to bottom: Extract the CAB, delete the videos (if selected), run game (depending on user's choice on the videos).
 Filename: "{app}\i5comp.exe"; Parameters: "x {app}\DATA1.CAB"; Flags: runascurrentuser
 ; Is original Python 3 EXE hardcoded to delete the three AVI files.
-Filename: "{app}\Uninstall\VideoDel.exe"; Flags: runascurrentuser; Components: Minimal
+Filename: "{app}\Uninstall\VideoDel.exe"; Parameters: """{app}"""; Flags: runascurrentuser; Components: Minimal
 Filename: "{app}\{#MyAppExeName}"; Flags: nowait postinstall skipifsilent; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Components: Full
 Filename: "{app}\{#MyAppExeName}"; Parameters: "-novideo"; Flags: nowait postinstall skipifsilent; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Components: Minimal
 
@@ -137,7 +137,7 @@ Filename: "{app}\Uninstall\ICDDel.exe"; Parameters: """{app}"""; Components: Ful
 Name: "{app}\Save"; Flags: uninsneveruninstall
 
 [Code]
-// Pascal script from Bgbennyboy to pull files off a CD, greatly trimmed up and modified to support ANSI and Unicode Inno Setup by le717.
+// Pascal script from Bgbennyboy to pull files off a CD, greatly trimmed up and modified to support ANSI and Unicode Inno Setup by Triangle717.
 var
 	SourceDrive: string;
 
