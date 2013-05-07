@@ -1,3 +1,4 @@
+#! /usr/bin/python
 """LEGO Racers Alternate Installer V1.0.1
 Created 2013 Triangle717
 <http://triangle717.wordpress.com/>
