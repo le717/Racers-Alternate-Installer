@@ -1,5 +1,5 @@
-//  Racers Alternate Installer V1.0
-//  Copyright © 2013 Triangle717
+//  LEGO Racers Alternate Installer V1.0
+//  Created 2013 Triangle717
 //  <http://triangle717.wordpress.com/>
 //  Contains source code from Grim Fandango Setup
 //  Copyright (c) 2007-2008 Bgbennyboy
@@ -9,7 +9,7 @@
 [Code]
 
 var
-  DrvLetters: array of AnsiString;
+	DrvLetters: array of AnsiString;
 
 	function GetDriveType( lpDisk: AnsiString ): Integer;
 	external 'GetDriveTypeA@kernel32.dll stdcall';

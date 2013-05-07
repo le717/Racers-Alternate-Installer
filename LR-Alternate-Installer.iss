@@ -1,5 +1,5 @@
-;  Racers Alternate Installer V1.0
-;  Copyright © 2013 Triangle717
+;  LEGO Racers Alternate Installer V1.0
+;  Created 2013 Triangle717
 ;  <http://triangle717.wordpress.com/>
 ;  Contains source code from Grim Fandango Setup
 ;  Copyright (c) 2007-2008 Bgbennyboy
@@ -24,7 +24,7 @@ AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 VersionInfoVersion={#MyAppInstallerVersion}
 AppPublisher={#MyAppPublisher}
-AppCopyright=© 1997 {#MyAppPublisher}
+AppCopyright=� 1997 {#MyAppPublisher}
 LicenseFile=license.txt
 ; Start menu/screen and Desktop shortcuts
 DefaultDirName={pf}\LEGO Media\{#MyAppName}
@@ -137,7 +137,7 @@ Name: "{app}\Save"; Flags: uninsneveruninstall
 [Code]
 // Pascal script from Bgbennyboy to pull files off a CD, greatly trimmed up and modified to support ANSI and Unicode Inno Setup by le717.
 var
-  SourceDrive: string;
+	SourceDrive: string;
 
 #include "FindDisc.iss"
 
