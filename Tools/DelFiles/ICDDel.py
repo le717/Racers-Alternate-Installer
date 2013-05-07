@@ -10,11 +10,9 @@ Copyright (c) 2007-2008 Bgbennyboy
 
 import os
 import sys
-
+    
 if os.path.exists("LEGORacers.icd"):
     os.unlink("LEGORacers.icd")
-    sys.stdout.write("\nLEGORacers.icd was deleted")
-
+    sys.stdout.write("\nLEGORacers.icd was deleted from\n'{0}'\n".format(os.getcwd()))
 else:
-    sys.stdout.write("\nLEGORacers.icd was not found")
-    
+    sys.stdout.write("\nLEGORacers.icd was not found in\n'{0}'\n".format(os.getcwd()))
