@@ -74,23 +74,25 @@ Name: "Full"; Description: "Full Installation (With Movies)"; Types: Full
 Name: "Minimal"; Description: "Minimal Installation (Without Movies)"; Types: Minimal
 
 [Files]
-; Pull the game files off the disc...
+; Pull the game files off the disc.
 Source: "{code:GetSourceDrive}DATA1.CAB"; DestDir: "{app}"; Flags: external ignoreversion deleteafterinstall; Components: Full Minimal
 Source: "{code:GetSourceDrive}DATA1.HDR"; DestDir: "{app}"; Flags: external ignoreversion deleteafterinstall; Components: Full Minimal
 Source: "{code:GetSourceDrive}SETUPDIR\0009\Readme.txt"; DestDir: "{app}"; Flags:  external ignoreversion; Components: Full Minimal
-; Install the manual and icon...
+
+; Manual and icon
 Source: "Manual.pdf"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist; Components: Full Minimal
 Source: "Racers.ico"; DestDir: "{app}"; Flags: ignoreversion; Components: Full Minimal
-; Tool needed to extract the CAB...
-Source: "Tools\CABExtract\i5comp.exe"; DestDir: "{app}"; Flags: deleteafterinstall; Attribs: hidden; Components: Full Minimal
-Source: "Tools\CABExtract\ZD51145.DLL"; DestDir: "{app}"; Flags: deleteafterinstall; Attribs: hidden; Components: Full Minimal
+
+; Tool needed to extract the CAB    
+Source: "Tools\CABExtract\i5comp.exe"; DestDir: "{app}"; Flags: deleteafterinstall; Components: Full Minimal
+Source: "Tools\CABExtract\ZD51145.DLL"; DestDir: "{app}"; Flags: deleteafterinstall; Components: Full Minimal
+
 ; Original tools to delete LEGORacers.icd and the videos (the latter under certain conditions).
-; Hidden files so somebody doesn't ask "What are these funny files and are they a virus?"
-Source: "Tools\DelFiles\ICDDel.exe"; DestDir: "{app}"; Flags: uninsrestartdelete; Attribs: hidden; Components: Full Minimal
-Source: "Tools\DelFiles\VideoDel.exe"; DestDir: "{app}"; Flags: deleteafterinstall; Attribs: hidden; Components: Minimal
-Source: "Tools\DelFiles\_bz2.pyd"; DestDir: "{app}"; Flags: uninsrestartdelete; Attribs: hidden; Components: Minimal
-Source: "Tools\DelFiles\python33.dll"; DestDir: "{app}"; Flags: uninsrestartdelete; Attribs: hidden; Components: Minimal
-Source: "Tools\DelFiles\unicodedata.pyd"; DestDir: "{app}"; Flags: uninsrestartdelete; Attribs: hidden; Components: Minimal
+Source: "Tools\DelFiles\VideoDel.exe"; DestDir: "{app}\Uninstall"; Flags: deleteafterinstall; Components: Full Minimal
+Source: "Tools\DelFiles\ICDDel.exe"; DestDir: "{app}\Uninstall"; Flags: uninsrestartdelete; Components: Full Minimal
+Source: "Tools\DelFiles\_bz2.pyd"; DestDir: "{app}\Uninstall"; Flags: uninsrestartdelete; Components: Full Minimal
+Source: "Tools\DelFiles\python33.dll"; DestDir: "{app}\Uninstall"; Flags: uninsrestartdelete; Components: Full Minimal
+Source: "Tools\DelFiles\unicodedata.pyd"; DestDir: "{app}\Uninstall"; Flags: uninsrestartdelete; Components: Full Minimal
 
 [Icons]
 ; First and last icons are created only if user choose not to install the  videos, else the normal ones are created.
@@ -112,7 +114,7 @@ Root: "HKCU"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFla
 ; From to to bottom: Extract the CAB, delete the videos (if selected), run game (depending on user's choice on the videos).
 Filename: "{app}\i5comp.exe"; Parameters: "x {app}\DATA1.CAB"; Flags: runascurrentuser
 ; Is original Python 3 EXE hardcoded to delete the three AVI files.
-Filename: "{app}\VideoDel.exe"; Flags: runascurrentuser; Components: Minimal
+Filename: "{app}\Uninstall\VideoDel.exe"; Flags: runascurrentuser; Components: Minimal
 Filename: "{app}\{#MyAppExeName}"; Flags: nowait postinstall skipifsilent; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Components: Full
 Filename: "{app}\{#MyAppExeName}"; Parameters: "-novideo"; Flags: nowait postinstall skipifsilent; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Components: Minimal
 
@@ -128,7 +130,7 @@ Type: files; Name: "{app}\HVSCmp.avi"; Components: Full
 
 [UninstallRun]
 ; Is original Python 3 EXE hardcodded to delete LEGORacers.icd at uninstallation if it exists
-Filename: "{app}\ICDDel.exe"; Components: Full Minimal
+Filename: "{app}\Uninstall\ICDDel.exe"; Parameters: """{app}"""; Components: Full Minimal
 
 [Dirs]
 ; It has to be created to ensure the save games are not removed (which should never ever happen).

@@ -10,9 +10,11 @@ Copyright (c) 2007-2008 Bgbennyboy
 
 import os
 import sys
+
+folder_path = sys.argv[1]
     
-if os.path.exists("LEGORacers.icd"):
+if os.path.exists(os.path.join(folder_path, "LEGORacers.icd")):
     os.unlink("LEGORacers.icd")
-    sys.stdout.write("\nLEGORacers.icd was deleted from\n'{0}'\n".format(os.getcwd()))
+    sys.stdout.write('\nLEGORacers.icd was deleted from\n"{0}"\n'.format(folder_path))
 else:
-    sys.stdout.write("\nLEGORacers.icd was not found in\n'{0}'\n".format(os.getcwd()))
+    sys.stdout.write('\nLEGORacers.icd was not found in\n"{0}"\n'.format(folder_path))
