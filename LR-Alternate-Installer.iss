@@ -1,4 +1,4 @@
-;  LEGO Racers Alternate Installer V1.0
+;  LEGO Racers Alternate Installer V1.0.1
 ;  Created 2013 Triangle717
 ;  <http://triangle717.wordpress.com/>
 ;  Contains source code from Grim Fandango Setup
@@ -12,7 +12,7 @@
 #endif
 
 #define MyAppInstallerName "LEGO Racers Alternate Installer"
-#define MyAppInstallerVersion "1.0"
+#define MyAppInstallerVersion "1.0.1"
 #define MyAppName "LEGO Racers"
 #define MyAppVersion "1.0.0.0"
 #define MyAppPublisher "LEGO Media"

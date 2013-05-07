@@ -1,4 +1,4 @@
-//  LEGO Racers Alternate Installer V1.0
+//  LEGO Racers Alternate Installer V1.0.1
 //  Created 2013 Triangle717
 //  <http://triangle717.wordpress.com/>
 //  Contains source code from Grim Fandango Setup
@@ -120,7 +120,7 @@ begin
 	begin
 		while FindUniqueFile() = '' do
 		begin
-			if MsgBox('Is there even a LEGO Racers CD in your computer?. If not, please insert it and press OK.', mbConfirmation, MB_OKCANCEL or MB_DEFBUTTON1) = IDOK then
+			if MsgBox('Is there even a LEGO Racers CD in your computer? If not, please insert it and press OK.', mbConfirmation, MB_OKCANCEL or MB_DEFBUTTON1) = IDOK then
 
 			else
 				Abort;
