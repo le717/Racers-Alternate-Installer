@@ -166,3 +166,4 @@ pip-log.txt
 Here Lie The Exe/*
 *.~is
 Tools/ICDDel/*
+*.icd
