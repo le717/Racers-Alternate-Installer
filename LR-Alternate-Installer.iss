@@ -45,8 +45,10 @@ UninstallDisplayIcon={#MyAppExeName}
 CreateUninstallRegKey=yes
 UninstallDisplayName={#MyAppName}
 ; Compression
+Compression=lzma2/ultra64
 SolidCompression=True
 InternalCompressLevel=ultra
+LZMAUseSeparateProcess=yes
 ; From top to bottom: Allows installation to C:\ (and the like),
 ; Explicitly set Admin rights, no other languages, do not restart upon finishing.
 AllowRootDirectory=yes
