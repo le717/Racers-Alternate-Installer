@@ -4,7 +4,7 @@
 //  Contains source code from Grim Fandango Setup
 //  Copyright (c) 2007-2008 Bgbennyboy
 //  <http://quick.mixnmojo.com/>
-//  and original Python 3.3 Exes by le717
+//  and original Python Exes by Triangle717
 
 [Code]
 var

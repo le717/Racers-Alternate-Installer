@@ -4,7 +4,7 @@
 ;  Contains source code from Grim Fandango Setup
 ;  Copyright (c) 2007-2008 Bgbennyboy
 ;  <http://quick.mixnmojo.com/>
-;  and original Python 3.3 Exes by le717
+;  and original Python Exes by Triangle717
 
 ; If any version below the specified version is used for compiling, this error will be shown.
 #if VER < EncodeVer(5,5,2)
@@ -27,7 +27,7 @@ AppPublisher={#MyAppPublisher}
 AppCopyright=© 1997 {#MyAppPublisher}
 LicenseFile=license.txt
 ; Start menu/screen and Desktop shortcuts
-DefaultDirName={pf}\LEGO Media\{#MyAppName}
+DefaultDirName={pf}\LEGO Media\Games\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
 ; Installer Graphics
@@ -48,7 +48,7 @@ UninstallDisplayName={#MyAppName}
 SolidCompression=True
 InternalCompressLevel=ultra
 ; From top to bottom: Allows installation to C:\ (and the like),
-; Expliscy set Admin rights, no other languages, do not restart upon finishing.
+; Explicitly set Admin rights, no other languages, do not restart upon finishing.
 AllowRootDirectory=yes
 PrivilegesRequired=admin
 ShowLanguageDialog=no
@@ -58,11 +58,11 @@ RestartIfNeededByRun=no
 Name: "English"; MessagesFile: "compiler:Default.isl"
 
 [Messages]
-English.BeveledLabel={#MyAppInstallerName} {#MyAppInstallerVersion}
-; English.WelcomeLabel2 is overridden because I'm unsure if every LEGO Racers disc says version 1.0.0.0 or just mine.
-English.WelcomeLabel2=This will install [name] on your computer.%n%nIt is recommended that you close all other applications before continuing.
-; English.DiskSpaceMBLabel is disabled because it reports an incorrect installation size.
-English.DiskSpaceMBLabel=
+BeveledLabel={#MyAppInstallerName} {#MyAppInstallerVersion}
+; WelcomeLabel2 is overridden because I'm unsure if every LEGO Racers disc says version 1.0.0.0 or just mine.
+WelcomeLabel2=This will install [name] on your computer.%n%nIt is recommended that you close all other applications before continuing.
+; DiskSpaceMBLabel is overridden because it reports an incorrect installation size.
+DiskSpaceMBLabel=At least 107 MB of free disk space is required.
 
 ; Both Types and Components sections are required to create the installation options.
 [Types]
@@ -94,10 +94,13 @@ Source: "Tools\CABExtract\ZD51145.DLL"; DestDir: "{app}"; Flags: deleteafterinst
 
 ; Original tools to delete LEGORacers.icd and the videos (the latter under certain conditions).
 Source: "Tools\DelFiles\VideoDel.exe"; DestDir: "{app}\Uninstall"; Flags: deleteafterinstall; Components: Full Minimal
-Source: "Tools\DelFiles\ICDDel.exe"; DestDir: "{app}\Uninstall"; Flags: uninsrestartdelete; Components: Full Minimal
-Source: "Tools\DelFiles\_bz2.pyd"; DestDir: "{app}\Uninstall"; Flags: uninsrestartdelete; Components: Full Minimal
-Source: "Tools\DelFiles\python33.dll"; DestDir: "{app}\Uninstall"; Flags: uninsrestartdelete; Components: Full Minimal
-Source: "Tools\DelFiles\unicodedata.pyd"; DestDir: "{app}\Uninstall"; Flags: uninsrestartdelete; Components: Full Minimal
+; Source: "Tools\DelFiles\ICDDel.exe"; DestDir: "{app}\Uninstall"; Flags: uninsrestartdelete; Components: Full Minimal
+Source: "Tools\DelFiles\_bz2.pyd"; DestDir: "{app}\Uninstall"; Flags: deleteafterinstall; Components: Full Minimal
+; Source: "Tools\DelFiles\_bz2.pyd"; DestDir: "{app}\Uninstall"; Flags: uninsrestartdelete; Components: Full Minimal
+Source: "Tools\DelFiles\python33.dll"; DestDir: "{app}\Uninstall"; Flags: deleteafterinstall; Components: Full Minimal
+; Source: "Tools\DelFiles\python33.dll"; DestDir: "{app}\Uninstall"; Flags: uninsrestartdelete; Components: Full Minimal
+Source: "Tools\DelFiles\unicodedata.pyd"; DestDir: "{app}\Uninstall"; Flags: deleteafterinstall; Components: Full Minimal
+; Source: "Tools\DelFiles\unicodedata.pyd"; DestDir: "{app}\Uninstall"; Flags: uninsrestartdelete; Components: Full Minimal
 
 [Icons]
 ; First and last icons are created only if user choose not to install the  videos, else the normal ones are created.
@@ -120,13 +123,15 @@ Root: "HKCU"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFla
 Filename: "{app}\i5comp.exe"; Parameters: "x ""{app}\DATA1.CAB"""; Flags: runascurrentuser
 ; Is original Python 3 EXE hardcoded to delete the three AVI files.
 Filename: "{app}\Uninstall\VideoDel.exe"; Parameters: """{app}"""; Flags: runascurrentuser; Components: Minimal
-Filename: "{app}\{#MyAppExeName}"; Flags: nowait postinstall skipifsilent; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Components: Full
-Filename: "{app}\{#MyAppExeName}"; Parameters: "-novideo"; Flags: nowait postinstall skipifsilent; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Components: Minimal
+Filename: "{app}\{#MyAppExeName}"; Flags: nowait postinstall skipifsilent runascurrentuser; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Components: Full
+Filename: "{app}\{#MyAppExeName}"; Parameters: "-novideo"; Flags: nowait postinstall skipifsilent runascurrentuser; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Components: Minimal
 
 [UninstallDelete]
 ; Because the files came from a CAB were not installed from [Files], this is needed to delete the files.
 Type: files; Name: "{app}\{#MyAppExeName}"; Components: Full Minimal
 Type: files; Name: "{app}\*.tun"; Components: Full Minimal
+; Deletes LEGORacers.icd if it exists; Does not throw error if it does not exist
+Type: files; Name: "{app}\LEGORacers.icd"; Components: Full Minimal
 Type: files; Name: "{app}\GolDP.dll"; Components: Full Minimal
 Type: files; Name: "{app}\LEGO.JAM"; Components: Full Minimal
 Type: files; Name: "{app}\lmicmp.avi"; Components: Full
@@ -134,9 +139,10 @@ Type: files; Name: "{app}\introcmp.avi"; Components: Full
 Type: files; Name: "{app}\HVSCmp.avi"; Components: Full
 Type: filesandordirs; Name: "{app}\Uninstall"; Components: Full Minimal
 
-[UninstallRun]
+; Python Exe written to delete LEGORacers.icd, replaced with native Inno Setup code
+; [UninstallRun]
 ; Is original Python 3 EXE hardcodded to delete LEGORacers.icd at uninstallation if it exists
-Filename: "{app}\Uninstall\ICDDel.exe"; Parameters: """{app}"""; Components: Full Minimal
+; Filename: "{app}\Uninstall\ICDDel.exe"; Parameters: """{app}"""; Components: Full Minimal
 
 [Dirs]
 ; It has to be created to ensure the save games are not removed (which should never ever happen).
