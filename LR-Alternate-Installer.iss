@@ -41,9 +41,11 @@ OutputDir=Here Lie The EXE
 OutputBaseFilename={#MyAppInstallerName} {#MyAppInstallerVersion}
 ; Uninstallation stuff
 UninstallFilesDir={app}
-UninstallDisplayIcon={#MyAppExeName}
+UninstallDisplayIcon={app}\Racers.ico
 CreateUninstallRegKey=yes
 UninstallDisplayName={#MyAppName}
+; This is required so Inno can correctly report the installation size.
+UninstallDisplaySize=112820029
 ; Compression
 Compression=lzma2/ultra64
 SolidCompression=True
@@ -103,11 +105,11 @@ Source: "Tools\CABExtract\ZD51145.DLL"; DestDir: "{app}"; Flags: deleteafterinst
 
 [Icons]
 ; First and last icons are created only if user choose not to use the videos, else the normal ones are created.
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Comment: "Run LEGO Racers"; Components: Full
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Comment: "Run LEGO Racers without Intro videos"; Parameters: "-novideo"; Components: Minimal
-Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
-Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Comment: "Run LEGO Racers"; Components: Full; Tasks: desktopicon
-Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Parameters: "-novideo"; Comment: "Run LEGO Racers without Intro videos"; Components: Minimal; Tasks: desktopicon
+Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\Racers.ico"; IconIndex: 0; Comment: "Run LEGO Racers"; Components: Full
+Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\Racers.ico"; IconIndex: 0; Parameters: "-novideo"; Comment: "Run LEGO Racers without Intro videos"; Components: Minimal
+Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; IconFilename: "{app}\Racers.ico"; IconIndex: 0
+Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\Racers.ico"; IconIndex: 0; Comment: "Run LEGO Racers"; Components: Full; Tasks: desktopicon
+Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\Racers.ico"; IconIndex: 0; Parameters: "-novideo"; Comment: "Run LEGO Racers without Intro videos"; Components: Minimal; Tasks: desktopicon
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
