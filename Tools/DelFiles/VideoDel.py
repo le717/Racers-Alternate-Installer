@@ -2,11 +2,10 @@
 """LEGO Racers Alternate Installer V1.0.1
 Created 2013 Triangle717
 <http://triangle717.wordpress.com/>
-Contains source code from Grim Fandango Setup
-Copyright (c) 2007-2008 Bgbennyboy
-<http://quick.mixnmojo.com/>"""
 
-# Deletes the LEGO Racers intro videos if uses choses that option during installation
+This script deletes the LEGO Racers intro videos
+if that option is chosen during installation """
+
 import os
 import sys
 

@@ -20,7 +20,7 @@ const
 // Standard LEGO Racers disc
 	UniqueFile_1 = 'RACERS.ICO';
 // Boys Only Club release
-	UniqueFile_2 = 'Lego Racers\RACERS.ICO';
+	UniqueFile_2 = 'Lego Racers\Racers.ico';
 
 
 	DRIVE_UNKNOWN = 0; // The drive type cannot be determined.
@@ -93,12 +93,14 @@ var
 begin
 	for i:=0 to GetArrayLength(DrvLetters) -1 do
 	begin
+    // A standard LEGO Racers disc was detected
 		if FileExists( DrvLetters[i] + UniqueFile_1) then
 		begin
 			result:=DrvLetters[i];
 			exit;
 		end
 		else
+    // A Boys Only Club disc was detected
     if FileExists( DrvLetters[i] + UniqueFile_2) then
 		begin
 			result:=DrvLetters[i];
@@ -116,7 +118,7 @@ begin
 	FindAllCdDrives();
 	if GetArrayLength(DrvLetters) < 1 then
 	begin
-		MsgBox('No optical drive found on your computer.', mbError, MB_OK);
+		MsgBox('No optical drive found was found on your computer.', mbError, MB_OK);
 		Abort;
 	end;
 
@@ -129,7 +131,7 @@ begin
 	begin
 		while FindUniqueFile() = '' do
 		begin
-			if MsgBox('Is there even a LEGO Racers CD in your computer? If not, please insert it and press OK.', mbConfirmation, MB_OKCANCEL or MB_DEFBUTTON1) = IDOK then
+			if MsgBox('Is there a LEGO Racers CD in your computer? If not, please insert it and press OK.', mbConfirmation, MB_OKCANCEL or MB_DEFBUTTON1) = IDOK then
 
 			else
 				Abort;

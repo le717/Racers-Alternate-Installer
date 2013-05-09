@@ -19,7 +19,7 @@
 #define MyAppExeName "LEGORacers.exe"
 
 [Setup]
-AppID={
+AppID={#MyAppInstallerName}{#MyAppInstallerVersion}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 VersionInfoVersion={#MyAppInstallerVersion}
@@ -74,16 +74,21 @@ Name: "Full"; Description: "Full Installation (With Movies)"; Types: Full
 Name: "Minimal"; Description: "Minimal Installation (Without Movies)"; Types: Minimal
 
 [Files]
-; Pull the game files off the disc.
-Source: "{code:GetSourceDrive}DATA1.CAB"; DestDir: "{app}"; Flags: external ignoreversion deleteafterinstall; Components: Full Minimal
-Source: "{code:GetSourceDrive}DATA1.HDR"; DestDir: "{app}"; Flags: external ignoreversion deleteafterinstall; Components: Full Minimal
-Source: "{code:GetSourceDrive}SETUPDIR\0009\Readme.txt"; DestDir: "{app}"; Flags:  external ignoreversion; Components: Full Minimal
+; Pull the game files off a standard LEGO Racers disc.
+Source: "{code:GetSourceDrive}DATA1.CAB"; DestDir: "{app}"; Flags: external ignoreversion deleteafterinstall skipifsourcedoesntexist; Components: Full Minimal
+Source: "{code:GetSourceDrive}DATA1.HDR"; DestDir: "{app}"; Flags: external ignoreversion deleteafterinstall skipifsourcedoesntexist; Components: Full Minimal
+Source: "{code:GetSourceDrive}SETUPDIR\0009\Readme.txt"; DestDir: "{app}"; Flags: external ignoreversion skipifsourcedoesntexist; Components: Full Minimal
+
+; Pull the game files off a Boys Only Club disc.
+Source: "{code:GetSourceDrive}Lego Racers\data1.cab"; DestDir: "{app}"; Flags: external ignoreversion deleteafterinstall skipifsourcedoesntexist; Components: Full Minimal
+Source: "{code:GetSourceDrive}Lego Racers\data1.hdr"; DestDir: "{app}"; Flags: external ignoreversion deleteafterinstall skipifsourcedoesntexist; Components: Full Minimal
+Source: "{code:GetSourceDrive}Lego Racers\setupdir\0009\ReadMe.txt"; DestDir: "{app}"; Flags: external ignoreversion skipifsourcedoesntexist; Components: Full Minimal
 
 ; Manual and icon
 Source: "Manual.pdf"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist; Components: Full Minimal
 Source: "Racers.ico"; DestDir: "{app}"; Flags: ignoreversion; Components: Full Minimal
 
-; Tool needed to extract the CAB    
+; Tool needed to extract the CAB
 Source: "Tools\CABExtract\i5comp.exe"; DestDir: "{app}"; Flags: deleteafterinstall; Components: Full Minimal
 Source: "Tools\CABExtract\ZD51145.DLL"; DestDir: "{app}"; Flags: deleteafterinstall; Components: Full Minimal
 
