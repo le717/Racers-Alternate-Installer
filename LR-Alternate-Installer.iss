@@ -112,7 +112,7 @@ Root: "HKCU"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFla
 
 [Run]
 ; From to to bottom: Extract the CAB, delete the videos (if selected), run game (depending on user's choice on the videos).
-Filename: "{app}\i5comp.exe"; Parameters: "x {app}\DATA1.CAB"; Flags: runascurrentuser
+Filename: "{app}\i5comp.exe"; Parameters: "x ""{app}\DATA1.CAB"""; Flags: runascurrentuser
 ; Is original Python 3 EXE hardcoded to delete the three AVI files.
 Filename: "{app}\Uninstall\VideoDel.exe"; Parameters: """{app}"""; Flags: runascurrentuser; Components: Minimal
 Filename: "{app}\{#MyAppExeName}"; Flags: nowait postinstall skipifsilent; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Components: Full
@@ -127,6 +127,7 @@ Type: files; Name: "{app}\LEGO.JAM"; Components: Full Minimal
 Type: files; Name: "{app}\lmicmp.avi"; Components: Full
 Type: files; Name: "{app}\introcmp.avi"; Components: Full
 Type: files; Name: "{app}\HVSCmp.avi"; Components: Full
+Type: filesandordirs; Name: "{app}\Uninstall"; Components: Full Minimal
 
 [UninstallRun]
 ; Is original Python 3 EXE hardcodded to delete LEGORacers.icd at uninstallation if it exists

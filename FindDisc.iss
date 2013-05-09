@@ -17,7 +17,9 @@ var
 	external 'GetLogicalDriveStringsA@kernel32.dll stdcall';
 
 const
+// Standard LEGO Racers disc
 	UniqueFile_1 = 'RACERS.ICO';
+// Boys Only Club release
 	UniqueFile_2 = 'Lego Racers\RACERS.ICO';
 
 
