@@ -33,8 +33,8 @@ DefaultGroupName=LEGO Media\{#MyAppNameNoR}
 AllowNoIcons=yes
 ; Installer Graphics
 SetupIconFile=Racers.ico
-WizardImageFile=LEGO Racers Sidebar.bmp
-WizardSmallImageFile=InnoSetup LEGO Logo.bmp
+WizardImageFile=Sidebar.bmp
+WizardSmallImageFile=Small-Image.bmp
 WizardImageStretch=True
 WizardImageBackColor=clBlack
 ; Location of the compiled Exe
