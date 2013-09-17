@@ -25,10 +25,10 @@ AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 VersionInfoVersion={#MyAppInstallerVersion}
 AppPublisher={#MyAppPublisher}
-AppCopyright=© 1997 {#MyAppPublisher}
+AppCopyright=© 1999 {#MyAppPublisher}
 LicenseFile=license.txt
 ; Start menu/screen and Desktop shortcuts
-DefaultDirName={pf}\LEGO Media\Games\{#MyAppName}
+DefaultDirName={pf}\LEGO Media\Games\{#MyAppNameNoR}
 DefaultGroupName=LEGO Media\{#MyAppNameNoR}
 AllowNoIcons=yes
 ; Installer Graphics
@@ -38,15 +38,15 @@ WizardSmallImageFile=Small-Image.bmp
 WizardImageStretch=True
 WizardImageBackColor=clBlack
 ; Location of the compiled Exe
-OutputDir=Here Lie The EXE
-OutputBaseFilename={#MyAppNameNoR} Alternate Installer {#MyInstallerVersion}
+OutputDir=bin
+OutputBaseFilename={#MyAppNameNoR} Alternate Installer {#MyAppInstallerVersion}
 ; Uninstallation stuff
 UninstallFilesDir={app}
 UninstallDisplayIcon={app}\Racers.ico
 CreateUninstallRegKey=yes
 UninstallDisplayName={#MyAppName}
 ; This is required so Inno can correctly report the installation size.
-UninstallDisplaySize=112820029
+UninstallDisplaySize=114294784
 ; Compression
 Compression=lzma2/ultra64
 SolidCompression=True
