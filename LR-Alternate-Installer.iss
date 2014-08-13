@@ -1,18 +1,18 @@
-;  LEGO Racers Alternate Installer V1.0.2
-;  Created 2013 Triangle717
-;  <http://triangle717.wordpress.com/>
-;  Contains source code from Grim Fandango Setup
-;  Copyright (c) 2007-2008 Bgbennyboy
-;  <http://quick.mixnmojo.com/>
+; LEGO Racers Alternate Installer
+; Created 2013-2014 Triangle717
+; <http://Triangle717.WordPress.com/>
+; Contains source code from Grim Fandango Setup
+; Copyright (c) 2007-2008 Bgbennyboy
+; <http://quick.mixnmojo.com/>
 
 ; If any version below the specified version is used for compiling, 
 ; this error will be shown.
-#if VER < EncodeVer(5,5,2)
+#if VER < EncodeVer(5, 5, 2)
   #error You must use Inno Setup 5.5.2 or newer to compile this script
 #endif
 
-#define MyAppInstallerName "LEGO® Racers Alternate Installer"
-#define MyAppInstallerVersion "1.0.2"
+#define MyAppInstallerName "LEGO® Racers Alternate Installer - PRE-RELEASE"
+#define MyAppInstallerVersion "1.0.3"
 #define MyAppName "LEGO® Racers"
 #define MyAppNameNoR "LEGO Racers"
 #define MyAppVersion "1.0.0.0"
@@ -20,7 +20,7 @@
 #define MyAppExeName "LEGORacers.exe"
 
 [Setup]
-AppID={#MyAppInstallerName}{#MyAppInstallerVersion}
+AppID={#MyAppName}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 VersionInfoVersion={#MyAppInstallerVersion}
@@ -62,7 +62,7 @@ RestartIfNeededByRun=no
 Name: "English"; MessagesFile: "compiler:Default.isl"
 
 [Messages]
-BeveledLabel={#MyAppInstallerName} {#MyAppInstallerVersion}
+BeveledLabel={#MyAppInstallerName}
 ; WelcomeLabel2 is overridden because I'm unsure if every LEGO Racers disc says 
 ; version 1.0.0.0 or just mine.
 WelcomeLabel2=This will install [name] on your computer.%n%nIt is recommended that you close all other applications before continuing.
@@ -80,17 +80,19 @@ Name: "Minimal"; Description: "Minimal Installation (Without Movies)"; Types: Mi
 
 [Files]
 ; Pull the game files off a standard LEGO Racers disc.
-Source: "{code:GetSourceDrive}DATA1.CAB"; DestDir: "{app}"; Flags: external ignoreversion deleteafterinstall skipifsourcedoesntexist
-Source: "{code:GetSourceDrive}DATA1.HDR"; DestDir: "{app}"; Flags: external ignoreversion deleteafterinstall skipifsourcedoesntexist
 Source: "{code:GetSourceDrive}SETUPDIR\0009\Readme.txt"; DestDir: "{app}"; Flags: external ignoreversion skipifsourcedoesntexist
+; Source: "{code:GetSourceDrive}DATA1.CAB"; DestDir: "{app}"; Flags: external ignoreversion deleteafterinstall skipifsourcedoesntexist
+; Source: "{code:GetSourceDrive}DATA1.HDR"; DestDir: "{app}"; Flags: external ignoreversion deleteafterinstall skipifsourcedoesntexist
+Source: "{code:GetSourceDrive}data1.cab"; DestDir: "{app}"; Flags: external ignoreversion deleteafterinstall skipifsourcedoesntexist
+Source: "{code:GetSourceDrive}data1.hdr"; DestDir: "{app}"; Flags: external ignoreversion deleteafterinstall skipifsourcedoesntexist
 
 ; Pull the game files off a Boys Only Club disc.
+Source: "{code:GetSourceDrive}Lego Racers\setupdir\0009\ReadMe.txt"; DestDir: "{app}"; Flags: external ignoreversion skipifsourcedoesntexist
 Source: "{code:GetSourceDrive}Lego Racers\data1.cab"; DestDir: "{app}"; Flags: external ignoreversion deleteafterinstall skipifsourcedoesntexist
 Source: "{code:GetSourceDrive}Lego Racers\data1.hdr"; DestDir: "{app}"; Flags: external ignoreversion deleteafterinstall skipifsourcedoesntexist
-Source: "{code:GetSourceDrive}Lego Racers\setupdir\0009\ReadMe.txt"; DestDir: "{app}"; Flags: external ignoreversion skipifsourcedoesntexist
 
 ; Manual and icon
-Source: "Manual.pdf"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
+Source: "Manual.pdf"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Racers.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Tool needed to extract the CAB
@@ -112,13 +114,14 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "Admin"; Description: "Run {#MyAppName} with Administrator Rights"; GroupDescription: "{cm:AdditionalIcons}"
 
 [Registry]
-; Registry strings are always hard-coded (!No ISPP functions!) to ensure everything works properly.
+; Registry strings are always hard-coded (!No ISPP functions!) 
+; to ensure everything works properly.
 Root: "HKCU"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\LEGORacers.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue; Tasks: Admin
 
 [Run]
 ; From to to bottom: Extract the CAB, run game 
 ; (depending on user's choice on the videos).
-Filename: "{app}\i5comp.exe"; Parameters: "x ""{app}\DATA1.CAB"""; Flags: runascurrentuser
+Filename: "{app}\i5comp.exe"; Parameters: "x ""{app}\data1.cab"""; Flags: runascurrentuser
 Filename: "{app}\{#MyAppExeName}"; Flags: nowait postinstall skipifsilent runascurrentuser; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Components: Full
 Filename: "{app}\{#MyAppExeName}"; Parameters: "-novideo"; Flags: nowait postinstall skipifsilent runascurrentuser; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Components: Minimal
 
@@ -127,14 +130,15 @@ Filename: "{app}\{#MyAppExeName}"; Parameters: "-novideo"; Flags: nowait postins
 ; this is needed to delete them.
 Type: files; Name: "{app}\{#MyAppExeName}"
 Type: files; Name: "{app}\*.tun"
-; Deletes LEGORacers.icd if it exists; Does not throw error if it does not exist
+; Delete LEGORacers.icd; Does not throw error if it does not exist
 Type: files; Name: "{app}\LEGORacers.icd"
 Type: files; Name: "{app}\GolDP.dll"
 Type: files; Name: "{app}\LEGO.JAM"
 Type: files; Name: "{app}\*.avi"
 
 [Dirs]
-; Created to ensure the save games are not removed (which should never ever happen).
+; Created to ensure the save games are not removed 
+; (which should never ever happen).
 Name: "{app}\Save"; Flags: uninsneveruninstall
 
 [Code]
@@ -143,7 +147,7 @@ Name: "{app}\Save"; Flags: uninsneveruninstall
 var
 	SourceDrive: string;
 
-#include "FindDisc.iss"
+#include "FindDisc.pas"
 
 function GetSourceDrive(Param: String): String;
 begin
